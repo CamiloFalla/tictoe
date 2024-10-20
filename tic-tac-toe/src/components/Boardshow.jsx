@@ -1,6 +1,6 @@
 import { Square } from "./Square"
 
-export function Boardshow (){
+export function Boardshow (board){
 
     return (
         <section className='game'>
