@@ -27,3 +27,6 @@ cd nombre-del-proyecto
 npm install
 
 npm run dev
+
+install
+npm install canvas-confetti -E
