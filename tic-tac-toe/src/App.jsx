@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import confetti from 'canvas-confetti'
 import './App.css'
 
@@ -6,6 +6,7 @@ import { Square } from './components/Square'
 import { TURNS } from './components/constants'
 import { checkWinnerfrom, checkEndGame } from './logic/board'
 import { Mywinnermodal } from './components/Mywinnermodal'
+import { resetGame, saveGame } from './logic/storage'
 import { Boardshow } from './components/Boardshow'
 import { Selectturn } from './components/Selectturn'
 
@@ -32,8 +33,7 @@ function App() {
     setTurn(TURNS.X)
     setWinner(null)
 
-    window.localStorage.renoveItem('board')
-    window.localStorage.renoveItem('turn')
+    resetGame()
 
 
     //resetGameStorage()
@@ -48,9 +48,8 @@ function App() {
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
 
-    window.localStorage.setItem('board', JSON.stringify(newBoard))
-    window.localStorage.setItem('turn', newTurn)
     
+    saveGame({board: newBoard, turn:newTurn})
 
     const newWinner =checkWinnerfrom(newBoard)
     if (newWinner){
@@ -63,6 +62,7 @@ function App() {
     }
   }
 
+  
   return (
   <>
     <main className='board'>
